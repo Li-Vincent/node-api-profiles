@@ -1,0 +1,28 @@
+{
+  "name": "api-profiles",
+  "version": "1.0.0",
+  "description": "node api ",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Li-Vincent/node-api-profiles.git"
+  },
+  "keywords": [
+    "node",
+    "api"
+  ],
+  "author": "Vincent.Li",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Li-Vincent/node-api-profiles/issues"
+  },
+  "homepage": "https://github.com/Li-Vincent/node-api-profiles#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.3.6"
+  }
+}
