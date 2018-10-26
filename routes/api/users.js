@@ -11,6 +11,7 @@ const User = require('../../models/User')
 
 // 引入验证
 const validateRegisterInput = require('../../validation/register')
+const validateLoginInput = require('../../validation/login')
 
 const secretOrKey = require('../../config/keys').secretOrKey
 
@@ -24,6 +25,13 @@ const secretOrKey = require('../../config/keys').secretOrKey
 router.post('/login', (req, res) => {
     const email = req.body.email
     const password = req.body.password
+
+    const { errors, isValid } = validateLoginInput(req.body)
+    // 判断isValid是否通过
+    if (!isValid) {
+        return res.status(400).json(errors)
+    }
+
     // 查询数据库
     User.findOne({ email })
         .then((user) => {
