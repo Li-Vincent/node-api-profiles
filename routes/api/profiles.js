@@ -224,6 +224,7 @@ router.post('/experience', passport.authenticate('jwt', { session: false }), (re
                 res.json(profile)
             })
         })
+        .catch(err => res.status(404).json(err))
 })
 
 /**
