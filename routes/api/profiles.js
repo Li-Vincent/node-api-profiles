@@ -11,6 +11,8 @@ const Profile = require('../../models/Profile')
 
 // 引入验证
 const validateProfileInput = require('../../validation/profile')
+const validateExperienceInput = require('../../validation/experience')
+const validateEducationInput = require('../../validation/education')
 
 /**
  * $route
@@ -30,6 +32,7 @@ router.get('/test', (req, res) => {
 router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
     const errors = {}
     Profile.findOne({ user: req.user.id })
+        .populate('user', ["name", "avatar"])
         .then((profile) => {
             if (!profile) {
                 errors.noprofile = "该用户信息不存在！"
@@ -112,6 +115,193 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
                             .save()
                             .then(profile => res.json(profile))
                     })
+            }
+        })
+        .catch(err => res.status(404).json(err))
+})
+
+/**
+ * $route
+ * DELETE api/profile/:user_id
+ * @desc 删除整个用户
+ * @access private
+ */
+router.delete('/all', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const errors = {}
+    Profile.findOneAndDelete({ user: req.user.id })
+        .then(() => {
+            User.findOneAndDelete({ id: req.user.id })
+                .then(() => res.json({ success: true }))
+        })
+        .catch(err => res.status(404).json(err))
+})
+
+/**
+ * $route
+ * GET api/profile/handle/:handle
+ * @desc 根据handle获取用户的个人信息
+ * @access public
+ */
+router.get('/handle/:handle', (req, res) => {
+    const errors = []
+    Profile.findOne({ handle: req.params.handle })
+        .populate('user', ["name", "avatar"])
+        .then(profile => {
+            if (!profile) {
+                errors.noprofile = "未找到该用户信息"
+                return res.status(404).json(errors)
+            }
+            res.json(profile)
+        })
+        .catch(err => res.status(404).json(err))
+})
+
+
+/**
+ * $route
+ * GET api/profile/user/:user_id
+ * @desc 根据user_id获取用户的个人信息
+ * @access public
+ */
+router.get('/user/:user_id', (req, res) => {
+    const errors = []
+    Profile.findOne({ user: req.params.user_id })
+        .populate('user', ["name", "avatar"])
+        .then(profile => {
+            if (!profile) {
+                errors.noprofile = "未找到该用户信息"
+                return res.status(404).json(errors)
+            }
+            res.json(profile)
+        })
+        .catch(err => res.status(404).json(err))
+})
+
+/**
+ * $route
+ * GET api/profile/all
+ * @desc 获取所有用户的个人信息
+ * @access public
+ */
+router.get('/all', (req, res) => {
+    const errors = []
+    Profile.find()
+        .populate('user', ["name", "avatar"])
+        .then(profiles => {
+            if (!profiles) {
+                errors.noprofile = "还没有任何用户信息"
+                return res.status(404).json(errors)
+            }
+            res.json(profiles)
+        })
+        .catch(err => res.status(404).json(err))
+})
+
+/**
+ * $route
+ * POST api/profile/experience
+ * @desc 添加个人经历
+ * @access private
+ */
+router.post('/experience', passport.authenticate('jwt', { session: false }), (req, res) => {
+    // 验证输入
+    const { errors, isValid } = validateExperienceInput(req.body)
+    if (!isValid) {
+        return res.status(400).json(errors)
+    }
+    Profile.findOne({ user: req.user.id })
+        .then(profile => {
+            const newExp = {
+                title: req.body.title,
+                company: req.body.company,
+                location: req.body.location,
+                from: req.body.from,
+                to: req.body.to,
+                description: req.body.description
+            }
+            profile.experience.unshift(newExp);
+            profile.save().then(profile => {
+                res.json(profile)
+            })
+        })
+})
+
+/**
+ * $route
+ * DELETE api/profile/experience/:exp_id
+ * @desc 删除个人经历
+ * @access private
+ */
+router.delete('/experience/:exp_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const errors = {}
+    Profile.findOne({ user: req.user.id })
+        .then(profile => {
+            const removeIndex = profile.experience
+                .map(item => item.id)
+                .indexOf(req.params.exp_id)
+            if (removeIndex == -1) {
+                errors.index = "没有该个人经历"
+                return res.status(400).json(errors)
+            } else {
+                profile.experience.splice(removeIndex, 1);
+                profile.save()
+                    .then(profile => res.json(profile))
+                    .catch(err => res.status(400).json(err))
+            }
+        })
+        .catch(err => res.status(404).json(err))
+})
+
+/**
+ * $route
+ * POST api/profile/education
+ * @desc 添加教育经历
+ * @access private
+ */
+router.post('/education', passport.authenticate('jwt', { session: false }), (req, res) => {
+    // 验证输入
+    const { errors, isValid } = validateEducationInput(req.body)
+    if (!isValid) {
+        return res.status(400).json(errors)
+    }
+    Profile.findOne({ user: req.user.id })
+        .then(profile => {
+            const newEdu = {
+                school: req.body.school,
+                degree: req.body.degree,
+                major: req.body.major,
+                from: req.body.from,
+                to: req.body.to,
+                description: req.body.description
+            }
+            profile.education.unshift(newEdu);
+            profile.save().then(profile => {
+                res.json(profile)
+            })
+        })
+})
+
+/**
+ * $route
+ * DELETE api/profile/education/:edu_id
+ * @desc 删除教育经历
+ * @access private
+ */
+router.delete('/education/:edu_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const errors = {}
+    Profile.findOne({ user: req.user.id })
+        .then(profile => {
+            const removeIndex = profile.education
+                .map(item => item.id)
+                .indexOf(req.params.edu_id)
+            if (removeIndex == -1) {
+                errors.index = "没有该教育经历"
+                return res.status(400).json(errors)
+            } else {
+                profile.education.splice(removeIndex, 1);
+                profile.save()
+                    .then(profile => res.json(profile))
+                    .catch(err => res.status(400).json(err))
             }
         })
         .catch(err => res.status(404).json(err))
