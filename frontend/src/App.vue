@@ -1,10 +1,11 @@
 <template>
   <div id="app">
     <nav-bar></nav-bar>
+    <common-footer></common-footer>
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
-    <common-footer></common-footer>
+    <loading v-show="loading"></loading>
   </div>
 </template>
 
@@ -15,6 +16,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 import CommonFooter from "./components/Footer";
+import Loading from "./components/common/Loading";
 import jwt_decode from "jwt-decode";
 
 export default {
@@ -25,7 +27,8 @@ export default {
     Login,
     Register,
     Dashboard,
-    CommonFooter
+    CommonFooter,
+    Loading
   },
   methods: {
     isEmpty(value) {
@@ -35,6 +38,11 @@ export default {
         (typeof value === "object" && Object.keys(value).length === 0) ||
         (typeof value === "string" && value.trim().length === 0)
       );
+    }
+  },
+  computed: {
+    loading() {
+      return this.$store.getters.loading;
     }
   },
   created() {

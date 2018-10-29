@@ -9,7 +9,8 @@ Vue.use(Vuex)
 const state = {
     isAuthenticated: false,  // 是否验证，登录成功
     user: {},
-    profile: {} // 存储用户个人信息
+    profile: {}, // 存储用户个人信息
+    loading: false  // 是否处于请求状态
 }
 
 export default new Vuex.Store({
