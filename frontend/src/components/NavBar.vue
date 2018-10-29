@@ -1,0 +1,72 @@
+<template>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+    <div class="container">
+      <router-link to="/" class="navbar-brand">个人信息在线交流平台</router-link>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mobile-nav">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <router-link to="/profile" class="nav-link">开发者</router-link>
+          </li>
+        </ul>
+      </div>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item" v-show="isLogin">
+          <router-link to="/dashboard" class="nav-link">Dashboard</router-link>
+        </li>
+        <li class="nav-item" v-show="!isLogin">
+          <router-link to="/register" class="nav-link">注册</router-link>
+        </li>
+        <li class="nav-item" v-show="!isLogin">
+          <router-link to="/login" class="nav-link">登录</router-link>
+        </li>
+        <li class="nav-item" v-show="isLogin" v-if="user">
+          <a @click.prevent="logout" class="nav-link"><img class="rounded-circle headerImg" :src="user.avatar" :alt="user.name"> 退出</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</template>
+
+<script>
+export default {
+  name: "NavBar",
+  data() {
+    return {
+      msg: "Welcome to Your Vue.js App"
+    };
+  },
+  computed: {
+    isLogin() {
+      if (this.$store.getters.isAuthenticated) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    user() {
+      return this.$store.getters.user;
+    }
+  },
+  methods: {
+    logout() {
+      // 删除localStorage
+      localStorage.removeItem("jwtToken");
+      // 清空store
+      this.$store.dispatch("clearCurrentState");
+      this.$router.push("/login");
+    }
+  }
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+.headerImg {
+  width: 25px;
+  margin-right: 5px;
+  vertical-align: center;
+}
+</style>

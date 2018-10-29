@@ -35,13 +35,14 @@ router.post('/login', (req, res) => {
     // 查询数据库
     User.findOne({ email })
         .then((user) => {
-            if (!user) return res.status(404).json({ email: "用户不存在！" })
+            if (!user) return res.status(400).json({ email: "用户不存在！" })
             bcrypt.compare(req.body.password, user.password)
                 .then(isMatch => {
                     if (isMatch) {
                         const rule = {
                             id: user.id,
-                            name: user.name
+                            name: user.name,
+                            avatar: user.avatar
                         }
                         // 使用token
                         // jwt.sign("规则", "加密名字", "过期时间", "箭头函数")

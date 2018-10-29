@@ -16,8 +16,7 @@ module.exports = function validateRegisterInput(data) {
     }
     if (Validator.isEmpty(data.email)) {
         errors.email = "邮箱不能为空！"
-    }
-    if (!Validator.isEmail(data.email)) {
+    } else if (!Validator.isEmail(data.email)) {
         errors.email = "邮箱不合法！"
     }
     if (Validator.isEmpty(data.password)) {
@@ -27,9 +26,8 @@ module.exports = function validateRegisterInput(data) {
     }
     if (Validator.isEmpty(data.password2)) {
         errors.password2 = "确认密码不能为空！"
-    }
-    if (!Validator.equals(data.password, data.password2)) {
-        errors.match = "两次密码不一致！"
+    } else if (!Validator.equals(data.password, data.password2)) {
+        errors.password2 = "两次密码不一致！"
     }
 
     return {
