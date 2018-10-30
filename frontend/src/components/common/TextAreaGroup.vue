@@ -1,7 +1,6 @@
 <template>
     <div class="form-group">
-        <input :type="type" class="form-control form-control-lg" 
-            :placeholder="placeholder" :name="name" :disabled="disabled" 
+        <textarea class="form-control form-control-lg" :placeholder="placeholder" :name="name" 
             :class="{'is-invalid':error}" :value="value" @input="$emit('input',$event.target.value)" />
         <div class="invalid-feedback" v-if="error">
             {{error}}
@@ -12,18 +11,13 @@
 
 <script>
 export default {
-  name: "TextFieldGroup",
+  name: "TextAreaGroup",
   props: {
-    type: {
-      type: String,
-      default: "text"
-    },
     value: String,
     placeholder: String,
     name: String,
     error: String,
-    info: String,
-    disabled: String
+    info: String
   }
 };
 </script>

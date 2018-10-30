@@ -122,7 +122,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 
 /**
  * $route
- * DELETE api/profile/:user_id
+ * DELETE api/profile/all
  * @desc 删除整个用户
  * @access private
  */
@@ -130,8 +130,11 @@ router.delete('/all', passport.authenticate('jwt', { session: false }), (req, re
     const errors = {}
     Profile.findOneAndDelete({ user: req.user.id })
         .then(() => {
-            User.findOneAndDelete({ id: req.user.id })
-                .then(() => res.json({ success: true }))
+            User.findOneAndDelete({ _id: req.user.id })
+                .then(() => {
+                    console.log("delete")
+                    res.json({ success: true })
+                })
         })
         .catch(err => res.status(404).json(err))
 })

@@ -7,6 +7,8 @@ import Landing from '../components/Landing'
 import Login from '../components/Login'
 import Register from '../components/Register'
 import Dashboard from '../components/Dashboard'
+import CreateProfile from '../components/CreateProfile'
+import EditProfile from '../components/EditProfile'
 
 const route = new Router({
     mode: 'history',
@@ -16,6 +18,8 @@ const route = new Router({
         { path: '/login', component: Login },
         { path: '/register', component: Register },
         { path: '/dashboard', component: Dashboard },
+        { path: '/create-profile', component: CreateProfile },
+        { path: '/edit-profile', component: EditProfile },
         { path: '*', redirect: '/' }
     ]
 })
@@ -23,8 +27,11 @@ const route = new Router({
 route.beforeEach((to, from, next) => {
     // 判断token
     const isLogin = localStorage.jwtToken ? true : false
-    if (to.path == "/login" || to.path == "/register" || to.path == "/") {
+    console.log(isLogin);
+    if (to.path == "/login" || to.path == "/") {
         next()
+    } else if (to.path == "/register") {
+        isLogin ? next("/login") : next()
     } else {
         isLogin ? next() : next("/login")
     }

@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <nav-bar></nav-bar>
-    <common-footer></common-footer>
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
     <loading v-show="loading"></loading>
+    <common-footer></common-footer>
   </div>
 </template>
 
@@ -38,6 +38,18 @@ export default {
         (typeof value === "object" && Object.keys(value).length === 0) ||
         (typeof value === "string" && value.trim().length === 0)
       );
+    },
+    // 获取个人信息数据
+    getProfileData() {
+      this.$axios
+        .get("/api/profile")
+        .then(res => {
+          this.profile = res.data;
+          this.$store.dispatch("setProfile", res.data);
+        })
+        .catch(err => {
+          this.$store.dispatch("setProfile", null);
+        });
     }
   },
   computed: {

@@ -9,8 +9,8 @@ export const setProfile = ({ commit }, data) => {
 }
 export const clearCurrentState = ({ commit }, data) => {
     commit('setIsAuthenticated', false)
-    commit('setUser', {})
-    commit('setProfile', {})
+    commit('setUser', null)
+    commit('setProfile', null)
 }
 export const setLoading = ({ commit }, data) => {
     commit('setLoading', data)

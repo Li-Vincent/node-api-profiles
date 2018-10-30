@@ -1,8 +1,8 @@
 <template>
     <div class="form-group">
-        <input :type="type" class="form-control form-control-lg" 
-            :placeholder="placeholder" :name="name" :disabled="disabled" 
-            :class="{'is-invalid':error}" :value="value" @input="$emit('input',$event.target.value)" />
+        <select class="form-control form-control-lg" :name="name" @input="$emit('input',$event.target.value)" :value="value" :class="{'is-invalid':error}">
+            <option v-for="(option,index) in options" :key="index" :value="option.value">{{option.text}}</option>
+        </select>
         <div class="invalid-feedback" v-if="error">
             {{error}}
         </div>
@@ -12,18 +12,13 @@
 
 <script>
 export default {
-  name: "TextFieldGroup",
+  name: "SelectListGroup",
   props: {
-    type: {
-      type: String,
-      default: "text"
-    },
-    value: String,
-    placeholder: String,
     name: String,
     error: String,
     info: String,
-    disabled: String
+    options: Array,
+    value: String
   }
 };
 </script>

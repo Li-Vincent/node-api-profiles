@@ -12,12 +12,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.footer {
-  position: fixed;
+/* .footer {
+  position: relative;
   right: 0;
   left: 0;
   z-index: 1030;
   bottom: 0;
   margin-bottom: 0;
-}
+} */
 </style>
