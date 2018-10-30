@@ -9,6 +9,9 @@ import Register from '../components/Register'
 import Dashboard from '../components/Dashboard'
 import CreateProfile from '../components/CreateProfile'
 import EditProfile from '../components/EditProfile'
+import AddEducation from '../components/AddEducation'
+import AddExperience from '../components/AddExperience'
+import Profiles from '../components/Profiles'
 
 const route = new Router({
     mode: 'history',
@@ -20,6 +23,9 @@ const route = new Router({
         { path: '/dashboard', component: Dashboard },
         { path: '/create-profile', component: CreateProfile },
         { path: '/edit-profile', component: EditProfile },
+        { path: '/add-education', component: AddEducation },
+        { path: '/add-experience', component: AddExperience },
+        { path: '/profiles', component: Profiles },
         { path: '*', redirect: '/' }
     ]
 })
@@ -27,10 +33,10 @@ const route = new Router({
 route.beforeEach((to, from, next) => {
     // 判断token
     const isLogin = localStorage.jwtToken ? true : false
-    console.log(isLogin);
     if (to.path == "/login" || to.path == "/") {
         next()
     } else if (to.path == "/register") {
+        // 如果处于登录状态，则跳转到登录页面
         isLogin ? next("/login") : next()
     } else {
         isLogin ? next() : next("/login")

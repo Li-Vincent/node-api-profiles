@@ -220,6 +220,7 @@ router.post('/experience', passport.authenticate('jwt', { session: false }), (re
                 location: req.body.location,
                 from: req.body.from,
                 to: req.body.to,
+                current: req.body.current,
                 description: req.body.description
             }
             profile.experience.unshift(newExp);
