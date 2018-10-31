@@ -47,7 +47,7 @@ export default {
         company: "",
         website: "",
         location: "",
-        status: "*选择您的职业",
+        status: "0",
         skills: "",
         githubusername: "",
         bio: "",

@@ -8,14 +8,11 @@
       <div class="collapse navbar-collapse" id="mobile-nav">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <router-link to="/profile" class="nav-link">开发者</router-link>
+            <router-link to="/profiles" class="nav-link">开发者们</router-link>
           </li>
         </ul>
       </div>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item" v-show="isLogin">
-          <router-link to="/profiles" class="nav-link">Profiles</router-link>
-        </li>
         <li class="nav-item" v-show="isLogin">
           <router-link to="/dashboard" class="nav-link">Dashboard</router-link>
         </li>

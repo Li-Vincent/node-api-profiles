@@ -11,7 +11,11 @@ export const clearCurrentState = ({ commit }, data) => {
     commit('setIsAuthenticated', false)
     commit('setUser', null)
     commit('setProfile', null)
+    commit('setProfiles', [])
 }
 export const setLoading = ({ commit }, data) => {
     commit('setLoading', data)
+}
+export const setProfiles = ({ commit }, data) => {
+    commit('setProfiles', data)
 }

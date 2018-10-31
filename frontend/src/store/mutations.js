@@ -10,3 +10,6 @@ export const setProfile = (state, data) => {
 export const setLoading = (state, data) => {
     state.loading = data
 }
+export const setProfiles = (state, data) => {
+    state.profiles = data
+}

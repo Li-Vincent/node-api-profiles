@@ -12,6 +12,7 @@ import EditProfile from '../components/EditProfile'
 import AddEducation from '../components/AddEducation'
 import AddExperience from '../components/AddExperience'
 import Profiles from '../components/Profiles'
+import Profile from '../components/profile/Profile'
 
 const route = new Router({
     mode: 'history',
@@ -26,6 +27,7 @@ const route = new Router({
         { path: '/add-education', component: AddEducation },
         { path: '/add-experience', component: AddExperience },
         { path: '/profiles', component: Profiles },
+        { path: '/profile/:handle', component: Profile },
         { path: '*', redirect: '/' }
     ]
 })
