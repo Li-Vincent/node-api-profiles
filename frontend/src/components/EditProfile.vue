@@ -22,6 +22,8 @@
             <div v-show="displaySocialInputs">
               <InputGroup placeholder="微信(公众号)" name="wechat" v-model="profileInfo.wechat" :error="errors.wechat" icon="fa fa-wechat" />
               <InputGroup placeholder="QQ" name="QQ" v-model="profileInfo.QQ" :error="errors.QQ" icon="fa fa-qq" />
+              <InputGroup placeholder="微博" name="weibo" v-model="profileInfo.weibo" :error="errors.weibo" icon="fa fa-weibo" />
+              <InputGroup placeholder="手机号" name="phone" v-model="profileInfo.phone" :error="errors.phone" icon="fa fa-phone-square" />
             </div>
             <input type="submit" value="提交" class="btn btn-block btn-info mt-4">
           </form>
@@ -52,8 +54,8 @@ export default {
         bio: "",
         wechat: "",
         QQ: "",
-        tengxunkt: "",
-        wangyikt: ""
+        weibo: "",
+        phone: ""
       },
       options: [
         { value: "0", text: "*选择您的职业" },
@@ -119,19 +121,15 @@ export default {
         profile.social = profile.social ? profile.social : {};
         profile.wechat = profile.social.wechat ? profile.social.wechat : "";
         profile.QQ = profile.social.QQ ? profile.social.QQ : "";
-        profile.tengxunkt = profile.social.tengxunkt
-          ? profile.social.tengxunkt
-          : "";
-        profile.wangyikt = profile.social.wangyikt
-          ? profile.social.wangyikt
-          : "";
+        profile.weibo = profile.social.weibo ? profile.social.weibo : "";
+        profile.phone = profile.social.phone ? profile.social.phone : "";
         profile.skills = profile.skills.length ? profile.skills.join(",") : "";
 
         this.profileInfo = profile;
       }
     }
   },
-  created() {},
+  created() { },
   beforeRouteEnter(to, from, next) {
     next(vm => {
       if (vm.$store.getters.profile == null) {

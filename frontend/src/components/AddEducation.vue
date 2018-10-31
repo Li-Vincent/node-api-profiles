@@ -24,7 +24,7 @@
                                 当前在校
                             </label>
                         </div>
-                        <TextArea placeholder="在校表现" name="description" v-model="eduInfo.description" :error="errors.description" info="其他工作职责等" />
+                        <TextArea placeholder="在校表现" name="description" v-model="eduInfo.description" :error="errors.description" info="请描述在校表现" />
                         <input type="submit" class="btn btn-info btn-block mt-4" />
                     </form>
                 </div>

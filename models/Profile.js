@@ -97,10 +97,10 @@ const ProfileSchema = new Schema({
         QQ: {
             type: String
         },
-        tengxunkt: {
+        weibo: {
             type: String
         },
-        wangyikt: {
+        phone: {
             type: String
         }
     },

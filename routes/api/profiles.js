@@ -91,11 +91,11 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
     if (req.body.QQ) {
         profileFields.social.QQ = req.body.QQ
     }
-    if (req.body.tengxunkt) {
-        profileFields.social.tengxunkt = req.body.tengxunkt
+    if (req.body.weibo) {
+        profileFields.social.weibo = req.body.weibo
     }
-    if (req.body.wangyikt) {
-        profileFields.social.wangyikt = req.body.wangyikt
+    if (req.body.phone) {
+        profileFields.social.phone = req.body.phone
     }
     Profile.findOne({ user: req.user.id })
         .then((profile) => {

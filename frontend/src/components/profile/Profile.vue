@@ -1,13 +1,68 @@
 <template>
-    <div><h1>Profile</h1></div>
+    <div class="profile">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-6">
+                            <a @click="$router.go(-1)" class="btn btn-light mb-3 float-left">返回</a>
+                        </div>
+                        <div class="col-6">
+                        </div>
+                    </div>
+                    <profile-header :profile="profile"></profile-header>
+                    <profile-intro :profile="profile"></profile-intro>
+                    <profile-exp-edu v-if="profile && (profile.experience || profile.education)" :experience="profile.experience" :education="profile.education"></profile-exp-edu>
+                    <profile-github v-if="profile && profile.githubusername" :username="profile.githubusername"></profile-github>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
+import ProfileHeader from './ProfileHeader'
+import ProfileIntro from './ProfileIntro'
+import ProfileExpEdu from './ProfileExpEdu'
+import ProfileGithub from './ProfileGithub'
+
 export default {
+    name: "Profile",
+    data() {
+        return {
+            profile: {}
+        }
+    },
+    components: {
+        ProfileHeader,
+        ProfileIntro,
+        ProfileExpEdu,
+        ProfileGithub
+    },
+    created() {
+    },
+    methods: {
+        getProfileData() {
+            this.$axios.get(`/api/profile/handle/${this.$route.params.handle}`)
+                .then(res => {
+                    this.profile = res.data;
+                    this.$store.dispatch("setProfile", res.data);
+                })
+                .catch(err => {
+                    console.log(err.response);
+                    this.profile = {};
+                    this.$store.dispatch("setProfile", null);
+                });
+        }
+    },
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.getProfileData();
+        })
+    }
 
 }
 </script>
 
 <style>
-
 </style>
