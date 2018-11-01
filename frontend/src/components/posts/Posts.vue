@@ -2,7 +2,7 @@
     <div class="posts">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 mt-3">
                     <post-form @update="getPosts"></post-form>
                     <post-show @update="getPosts" v-for="post in posts" :key="post._id" :post="post" :error="errors"></post-show>
                 </div>

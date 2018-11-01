@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 m-auto">
-                    <a @click.prevent="$router.go(-1)" class="btn btn-light">
+                    <a @click.prevent="$router.go(-1)" class="btn btn-light mt-3">
                         返回
                     </a>
                     <h1 class="display-4 text-center">添加个人经历</h1>
@@ -25,7 +25,7 @@
                             </label>
                         </div>
                         <TextArea placeholder="工作描述" name="description" v-model="expInfo.description" :error="errors.description" info="其他工作职责等" />
-                        <input type="submit" class="btn btn-info btn-block mt-4" value="提交" />
+                        <input type="submit" class="btn btn-info btn-block mb-3" value="提交" />
                     </form>
                 </div>
             </div>

@@ -4,7 +4,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 m-auto">
-          <h1 class="display-4 text-center">登录</h1>
+          <h1 class="display-4 text-center mt-4">登录</h1>
           <p class="lead text-center">使用已有的账户登录</p>
           <form @submit.prevent="submit" method="POST">
             <TextField type="email" placeholder="邮箱地址" name="email" v-model="user.email" :error="errors.email" />

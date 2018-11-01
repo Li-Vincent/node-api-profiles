@@ -5,7 +5,7 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-6">
-                            <a @click="$router.go(-1)" class="btn btn-light mb-3 float-left">返回</a>
+                            <a @click="$router.go(-1)" class="btn btn-light mt-3 mb-1 float-left">返回</a>
                         </div>
                         <div class="col-6">
                         </div>

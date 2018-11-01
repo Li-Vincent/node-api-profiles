@@ -68,10 +68,9 @@ body {
   height: 100%;
 }
 .content {
-  height: auto;
   box-sizing: border-box;
   min-height: 100%;
-  padding-top: 70px;
-  padding-bottom: 100px;
+  padding-top: 58.5px;
+  padding-bottom: 72px;
 }
 </style>

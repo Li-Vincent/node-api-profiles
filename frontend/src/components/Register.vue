@@ -4,7 +4,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 m-auto">
-          <h1 class="display-4 text-center">注册</h1>
+          <h1 class="display-4 text-center mt-4">注册</h1>
           <p class="lead text-center">创建新的账户</p>
           <form @submit.prevent="submit" autocomplete="off" method="POST">
             <TextField placeholder="用户名" name="name" v-model="newUser.name" :error="errors.name" />

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="display-4">Dashboard</h1>
+          <h1 class="display-4 mt-4">个人信息</h1>
           <p v-if="user" class="lead text-muted">
             Welcome
             <router-link :to="`/profile/${profile.handle}`" v-if="profile">{{user.name}}</router-link>
@@ -99,7 +99,7 @@ export default {
       return this.$store.getters.user;
     }
   },
-  created() {},
+  created() { },
   beforeRouteEnter(to, from, next) {
     next(vm => {
       vm.getProfileData();

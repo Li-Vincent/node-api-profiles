@@ -2,8 +2,8 @@
     <div class="post">
         <div class="container">
             <div class="row" v-if="post">
-                <div class="col-md-12">
-                    <a @click="$router.go(-1)" class="btn btn-light mb-3">返回</a>
+                <div class="col-md-12 mt-3">
+                    <a @click="$router.go(-1)" class="btn btn-light mb-1">返回</a>
                     <post-show v-if="post" :post="post" :showAction="false"></post-show>
                     <comment-form :post_id="post._id" @update="getPost"></comment-form>
                     <comment-show @update="getPost" v-if="post.comments" v-for="comment in post.comments" :key="comment._id" :comment="comment" :postId="post._id" :error="errors"></comment-show>

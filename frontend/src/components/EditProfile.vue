@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 m-auto">
-          <a @click.prevent="$router.go(-1)" class="btn btn-light">返回</a>
+          <a @click.prevent="$router.go(-1)" class="btn btn-light mt-3">返回</a>
           <h1 class="display-5 text-center">编辑个人资料</h1>
           <small class="d-block pb-3">*表示必填项</small>
           <form @submit.prevent="submit" method="POST">
@@ -25,7 +25,7 @@
               <InputGroup placeholder="微博" name="weibo" v-model="profileInfo.weibo" :error="errors.weibo" icon="fa fa-weibo" />
               <InputGroup placeholder="手机号" name="phone" v-model="profileInfo.phone" :error="errors.phone" icon="fa fa-phone-square" />
             </div>
-            <input type="submit" value="提交" class="btn btn-block btn-info mt-4">
+            <input type="submit" value="提交" class="btn btn-block btn-info mb-3">
           </form>
         </div>
       </div>
