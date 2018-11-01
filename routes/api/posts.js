@@ -23,7 +23,7 @@ router.get('/test', (req, res) => {
 /**
  * $route 
  * POST: api/posts
- * @desc 创建一个评论
+ * @desc 创建一个留言
  * @access private
  */
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -45,7 +45,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 /**
  * $route 
  * GET: api/posts
- * @desc 获取所有评论信息
+ * @desc 获取所有留言信息
  * @access public
  */
 router.get('/', (req, res) => {
@@ -58,7 +58,7 @@ router.get('/', (req, res) => {
 /**
  * $route 
  * GET: api/posts/:id
- * @desc 获取单个评论信息
+ * @desc 获取单个留言信息
  * @access public
  */
 router.get('/:id', (req, res) => {
@@ -70,7 +70,7 @@ router.get('/:id', (req, res) => {
 /**
  * $route 
  * DELETE: api/posts/:id
- * @desc 删除单个评论信息
+ * @desc 删除单个留言信息
  * @access private
  */
 router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -113,7 +113,7 @@ router.post('/like/:id', passport.authenticate('jwt', { session: false }), (req,
 /**
  * $route 
  * POST: api/posts/unlike/:id
- * @desc 点赞
+ * @desc 删除点赞
  * @access private
  */
 router.post('/unlike/:id', passport.authenticate('jwt', { session: false }), (req, res) => {

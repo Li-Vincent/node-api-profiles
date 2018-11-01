@@ -10,8 +10,8 @@
                         <div class="col-6">
                         </div>
                     </div>
-                    <profile-header :profile="profile"></profile-header>
-                    <profile-intro :profile="profile"></profile-intro>
+                    <profile-header v-if="profile" :profile="profile"></profile-header>
+                    <profile-intro v-if="profile" :profile="profile"></profile-intro>
                     <profile-exp-edu v-if="profile && (profile.experience || profile.education)" :experience="profile.experience" :education="profile.education"></profile-exp-edu>
                     <profile-github v-if="profile && profile.githubusername" :username="profile.githubusername"></profile-github>
                 </div>
@@ -42,14 +42,14 @@ export default {
     created() {
     },
     methods: {
-        getProfileData() {
-            this.$axios.get(`/api/profile/handle/${this.$route.params.handle}`)
+        getProfileData(handle) {
+            this.$axios.get(`/api/profile/handle/${handle}`)
                 .then(res => {
                     this.profile = res.data;
                     this.$store.dispatch("setProfile", res.data);
                 })
                 .catch(err => {
-                    console.log(err.response);
+                    console.log(err.response.data);
                     this.profile = {};
                     this.$store.dispatch("setProfile", null);
                 });
@@ -57,7 +57,7 @@ export default {
     },
     beforeRouteEnter(to, from, next) {
         next(vm => {
-            vm.getProfileData();
+            vm.getProfileData(to.params.handle);
         })
     }
 

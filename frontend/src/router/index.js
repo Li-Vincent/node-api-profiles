@@ -13,6 +13,8 @@ import AddEducation from '../components/AddEducation'
 import AddExperience from '../components/AddExperience'
 import Profiles from '../components/Profiles'
 import Profile from '../components/profile/Profile'
+import Posts from '../components/posts/Posts'
+import Post from '../components/posts/Post'
 
 const route = new Router({
     mode: 'history',
@@ -28,6 +30,8 @@ const route = new Router({
         { path: '/add-experience', component: AddExperience },
         { path: '/profiles', component: Profiles },
         { path: '/profile/:handle', component: Profile },
+        { path: '/posts', component: Posts },
+        { path: '/posts/:post_id', component: Post },
         { path: '*', redirect: '/' }
     ]
 })

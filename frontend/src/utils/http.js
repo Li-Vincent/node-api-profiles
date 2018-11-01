@@ -4,7 +4,7 @@ import store from '../store'
 //使用axios 设置请求拦截，设置统一的header
 axios.interceptors.request.use(config => {
     store.dispatch("setLoading", true)
-    if (localStorage.jwtToken) {
+    if (localStorage.jwtToken && config.url.indexOf("github") == -1) {
         config.headers.Authorization = localStorage.jwtToken
     }
     return config

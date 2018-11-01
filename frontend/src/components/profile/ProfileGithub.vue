@@ -1,6 +1,6 @@
 <template>
     <div>
-        <hr />
+        <hr>
         <h3 class="mb-4">Github仓库信息</h3>
         <div v-for="repo in repos" :key="repo.id" class="card card-body mb-2">
             <div class="row">
@@ -30,34 +30,32 @@
 
 <script>
 export default {
-    name: "ProfileGithub",
-    data() {
-        return {
-            clientId: "d0800b2e1e4edf23758c",
-            clientSecret: "c2171f07276237bf166715faacc686f4b5e7ba73",
-            count: 0,
-            sort: "created: desc",
-            repos: []
-        };
-    },
-    props: {
-        username: String
-    },
-    created() {
-        // 请求github地址
-        fetch(
-            `https://api.github.com/users/${this.username}/repos?per_page=${
-            this.count
-            }&sort=${this.sort}&client_id=${this.clientId}&client_secret=${
-            this.clientSecret
-            }`
-        )
-            .then(res => res.json())
-            .then(data => {
-                this.repos = data;
-            })
-            .catch(err => console.log(err));
-    }
+  name: "ProfileGithub",
+  data() {
+    return {
+      clientId: "4caec592f19efed7d156",
+      clientSecret: "38c647051eaafc5f6e6b57e7f5edee7e22dc8626",
+      count: 5,
+      sort: "created: desc",
+      repos: []
+    };
+  },
+  props: {
+    username: String
+  },
+  created() {
+    // 请求github地址
+    this.$axios
+      .get(
+        `https://api.github.com/users/${this.username}/repos?per_page=${
+          this.count
+        }&sort=${this.sort}&client_id=${this.clientId}&client_secret=${
+          this.clientSecret
+        }`
+      )
+      .then(res => (this.repos = res.data))
+      .catch(err => console.log(err.response.data));
+  }
 };
 </script>
 

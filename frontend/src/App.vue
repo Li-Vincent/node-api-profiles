@@ -2,7 +2,7 @@
   <div id="app">
     <nav-bar></nav-bar>
     <keep-alive>
-      <router-view></router-view>
+      <router-view class="content"></router-view>
     </keep-alive>
     <loading v-show="loading"></loading>
     <common-footer></common-footer>
@@ -58,4 +58,20 @@ export default {
 </script>
 
 <style>
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#app {
+  height: 100%;
+}
+.content {
+  height: auto;
+  box-sizing: border-box;
+  min-height: 100%;
+  padding-top: 70px;
+  padding-bottom: 100px;
+}
 </style>
