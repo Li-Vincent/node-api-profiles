@@ -4,13 +4,14 @@
             <h3 class="text-center text-info">个人经历</h3>
             <ul class="list-group">
                 <li class="list-group-item" v-for="(exp,index) in experience" :key="index">
-                    <h4>{{exp.company}}</h4>
+                    <!-- 项目名 -->
+                    <h4>{{exp.title}}</h4>
                     <p>{{exp.from}} - {{exp.to}}</p>
                     <p>
-                        <strong>职位：</strong>{{exp.title}}
+                        <strong>公司：</strong>{{exp.company}}
                     </p>
                     <p>
-                        <strong>地点：</strong>{{exp.title}}
+                        <strong>地点：</strong>{{exp.location}}
                     </p>
                     <p>
                         <strong>岗位职责：</strong>{{exp.description}}

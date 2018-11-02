@@ -14,7 +14,7 @@
                         <TextField placeholder="* 学校或培训" name="school" v-model="eduInfo.school" :error="errors.school" required="required" />
                         <TextField placeholder="* 学历" name="degree" v-model="eduInfo.degree" :error="errors.degree" required="required" />
                         <TextField placeholder="* 专业" name="major" v-model="eduInfo.major" :error="errors.major" required="required" />
-                        <h6>开始时间</h6>
+                        <h6>* 开始时间</h6>
                         <TextField type="date" name="from" v-model="eduInfo.from" :error="errors.from" />
                         <h6>结束时间</h6>
                         <TextField type="date" name="to" v-model="eduInfo.to" :error="errors.to" :disabled="eduInfo.current" />

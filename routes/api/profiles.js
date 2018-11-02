@@ -35,12 +35,14 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
         .populate('user', ["name", "avatar"])
         .then((profile) => {
             if (!profile) {
-                errors.noprofile = "该用户信息不存在！"
+                errors.profile = "该用户信息不存在！"
                 return res.status(404).json(errors)
             }
             res.json(profile)
         })
-        .catch(err => res.status(404).json(err))
+        .catch(err => {
+            return res.status(404).json(err)
+        })
 })
 
 /**
@@ -187,15 +189,16 @@ router.get('/user/:user_id', (req, res) => {
  * @access public
  */
 router.get('/all', (req, res) => {
-    const errors = []
+    const errors = {}
     Profile.find()
         .populate('user', ["name", "avatar"])
         .then(profiles => {
-            if (!profiles) {
-                errors.noprofile = "还没有任何用户信息"
+            if (profiles.length == 0) {
+                errors.profiles = "还没有任何用户信息"
                 return res.status(404).json(errors)
+            }else{
+                res.json(profiles)
             }
-            res.json(profiles)
         })
         .catch(err => res.status(404).json(err))
 })

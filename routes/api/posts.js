@@ -49,10 +49,18 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
  * @access public
  */
 router.get('/', (req, res) => {
+    const errors = {}
     Post.find()
         .sort({ date: -1 })
-        .then(posts => res.json(posts))
-        .catch(err => res.status(404).json({ noPostFound: "找不到任何评论信息！" }))
+        .then(posts => {
+            if (posts.length > 0) {
+                res.json(posts)
+            } else {
+                errors.noPostFound = "还没有任何留言信息！"
+                res.status(404).json(errors)
+            }
+        })
+        .catch(err => res.status(500).json(err))
 })
 
 /**
@@ -100,14 +108,14 @@ router.post('/like/:id', passport.authenticate('jwt', { session: false }), (req,
         .then(profile => {
             Post.findById(req.params.id)
                 .then(post => {
-                    if (post.likes.filter(like => like.user.toString() == req.user.id).length > 0) return res.status(400).json({ alreadyLike: "该用户已点赞！" })
+                    if (post.likes.filter(like => like.user.toString() == req.user.id).length > 0) return res.status(400).json({ alreadyLike: "已点赞！" })
                     post.likes.unshift({ user: req.user.id })
                     post.save()
                         .then(post => res.json(post))
                 })
                 .catch(err => res.status(404).json({ likeError: "点赞出错！" }))
         })
-        .catch(err => res.status(404).json({ noUserInfo: "您还没有录入个人信息，不能点赞！" }))
+        .catch(err => res.status(403).json({ noUserInfo: "您还没有录入个人信息，不能点赞！" }))
 })
 
 /**

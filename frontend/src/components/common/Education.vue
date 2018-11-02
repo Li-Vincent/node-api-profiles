@@ -14,7 +14,7 @@
             <tbody>
                 <tr v-for="edu in education" :key="edu._id">
                     <td>{{edu.school}}</td>
-                    <td>{{edu.major}}</td>
+                    <td>{{edu.degree}}</td>
                     <td>
                         {{edu.from}} - {{edu.to}}
                     </td>

@@ -7,7 +7,7 @@
           <p v-if="user" class="lead text-muted">
             Welcome
             <router-link :to="`/profile/${profile.handle}`" v-if="profile">{{user.name}}</router-link>
-            <router-link to="/profiles" v-else>开发者</router-link>
+            <router-link to="/profiles" v-else>开发者们</router-link>
           </p>
           <div v-if="profile">
             <ProfileTab/>
@@ -20,7 +20,7 @@
             <!-- 教育经历 -->
             <Education :education="profile.education" @deleteEducation="deleteEdu"></Education>
           </div>
-          <div v-if="!profile">
+          <div v-else>
             <p>没有相关的个人信息，请添加您的个人信息！</p>
             <router-link to="/create-profile" class="btn btn-lg btn-info">添加个人信息</router-link>
           </div>

@@ -11,10 +11,11 @@
       <div class="col-md-10">
         <p class="lead">{{post.text}}</p>
         <div v-if="showAction">
-          <button type="button" class="btn btn-light mr-1" @click="like(post._id)">
+          <button type="button" class="btn btn-light mr-1" @click="like(post._id)" :disabled="canUnlike">
             <i class="text-info fa fa-thumbs-up"></i>
             <span class="badge badge-light">{{post.likes.length}}</span>
           </button>
+          <span></span>
           <button type="button" class="btn btn-light mr-1" @click="unlike(post._id)" v-if="canUnlike">
             <i class="text-secondary fa fa-thumbs-down"></i>
           </button>
@@ -33,6 +34,11 @@
 <script>
 export default {
   name: "PostShow",
+  data() {
+    return {
+      error: {}
+    };
+  },
   props: {
     post: Object,
     errors: Object,
@@ -66,6 +72,7 @@ export default {
         })
         .catch(err => {
           console.log(err.response.data);
+          this.error = err.response.data;
         });
     },
     unlike(id) {

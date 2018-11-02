@@ -5,16 +5,16 @@
         <table class="table" v-if="experience.length>0">
             <thead>
                 <tr>
+                    <th>项目名</th>
                     <th>公司</th>
-                    <th>职位</th>
                     <th>年份</th>
                     <th />
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="exp in experience" :key="exp._id">
-                    <td>{{exp.company}}</td>
                     <td>{{exp.title}}</td>
+                    <td>{{exp.company}}</td>
                     <td>
                         {{exp.from}} ~ {{exp.to}}
                     </td>

@@ -14,7 +14,7 @@ module.exports = function validateProfileInput(data) {
     } else if (!Validator.isLength(data.handle, { min: 2, max: 40 })) {
         errors.handle = "用户名的长度不能小于2位或大于40位！"
     }
-    if (Validator.isEmpty(data.status)) {
+    if (Validator.isEmpty(data.status) || data.status == "0") {
         errors.status = "职位不能为空！"
     }
     if (Validator.isEmpty(data.skills)) {

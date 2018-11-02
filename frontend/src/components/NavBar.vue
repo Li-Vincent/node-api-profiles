@@ -17,7 +17,7 @@
           <router-link to="/posts" class="nav-link">留言板 </router-link>
         </li>
         <li class="nav-item" v-show="isLogin">
-          <router-link to="/dashboard" class="nav-link"><img class="rounded-circle headerImg" v-if="user" :src="user.avatar" :alt="user.name">{{user.name}}</router-link>
+          <router-link to="/dashboard" v-if="user" class="nav-link"><img class="rounded-circle headerImg" :src="user.avatar" :alt="user.name">{{user.name}}</router-link>
         </li>
         <li class="nav-item" v-show="!isLogin">
           <router-link to="/register" class="nav-link">注册</router-link>
@@ -26,7 +26,7 @@
           <router-link to="/login" class="nav-link">登录</router-link>
         </li>
         <li class="nav-item" v-show="isLogin">
-          <a @click.prevent="logout" class="nav-link">退出</a>
+          <a @click.prevent="logout" class="nav-link" >退出</a>
         </li>
       </ul>
     </div>
@@ -70,11 +70,15 @@ export default {
 .my-nav {
   position: relative;
   margin-bottom: -58.5px;
-  z-index: 999;
+  z-index: 9;
 }
 .headerImg {
   width: 25px;
   margin-right: 5px;
   vertical-align: center;
+}
+.dialog-index {
+  position: relative;
+  z-index: 9999;
 }
 </style>

@@ -14,7 +14,7 @@
                         <TextField placeholder="* 工作内容" name="title" v-model="expInfo.title" :error="errors.title" required />
                         <TextField placeholder="* 公司" name="company" v-model="expInfo.company" :error="errors.company" required />
                         <TextField placeholder="地点" name="location" v-model="expInfo.location" :error="errors.location" />
-                        <h6>开始时间</h6>
+                        <h6>* 开始时间</h6>
                         <TextField type="date" name="from" v-model="expInfo.from" :error="errors.from" />
                         <h6>结束时间</h6>
                         <TextField type="date" name="to" v-model="expInfo.to" :error="errors.to" :disabled="expInfo.current" />
